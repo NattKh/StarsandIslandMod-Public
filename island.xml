@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  API Monitor Filter - Starsand Island IL2CPP metadata ONLY
+  Capture: NtReadFile, NtMapViewOfSection, CreateFileW (metadata flow)
+  Display: HIDE calls from NVIDIA, Steam, apphelp - keep GameAssembly/UnityPlayer
+  Load: Monitor -> Capture Filter -> Load Filter (island.xml)
+  Usage: Attach to StarsandIsland.exe, start capture, load a save.
+  Look for: NtReadFile Buffer=0x... or NtMapViewOfSection BaseAddress=0x...
+-->
+<ApiMonitor>
+  <DisplayFilter>
+    <Filter Field="Calling Module Name" Relation="is" Value="NvMemMapStoragex.dll" Action="Hide" Enabled="True"/>
+    <Filter Field="Calling Module Name" Relation="is" Value="nvwgf2umx.dll" Action="Hide" Enabled="True"/>
+    <Filter Field="Calling Module Name" Relation="is" Value="steam_api64.dll" Action="Hide" Enabled="True"/>
+    <Filter Field="Calling Module Name" Relation="is" Value="apphelp.dll" Action="Hide" Enabled="True"/>
+    <Filter Field="Calling Module Name" Relation="is" Value="steamclient64.dll" Action="Hide" Enabled="True"/>
+    <Filter Field="Calling Module Name" Relation="is" Value="GameOverlayRenderer64.dll" Action="Hide" Enabled="True"/>
+  </DisplayFilter>
+  <CaptureFilter>
+    <Module Name="Kernel32.dll">
+      <Api Name="CreateFileW"/>
+      <Api Name="ReadFile"/>
+      <Api Name="CreateFileMappingW"/>
+      <Api Name="MapViewOfFile"/>
+    </Module>
+    <Module Name="KERNELBASE.dll">
+      <Api Name="NtCreateFile"/>
+      <Api Name="NtReadFile"/>
+      <Api Name="NtCreateSection"/>
+      <Api Name="NtMapViewOfSection"/>
+    </Module>
+    <Module Name="ntdll.dll">
+      <Api Name="NtCreateFile"/>
+      <Api Name="NtReadFile"/>
+      <Api Name="NtCreateSection"/>
+      <Api Name="NtMapViewOfSection"/>
+    </Module>
+  </CaptureFilter>
+</ApiMonitor>

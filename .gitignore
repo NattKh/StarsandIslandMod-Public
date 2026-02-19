@@ -1,0 +1,32 @@
+# Build outputs
+version.dll
+version.dll.old
+obj/
+bin/
+*.obj
+*.exp
+*.lib
+*.pdb
+StandaloneMod/version.dll
+StandaloneMod/version.exp
+StandaloneMod/version.lib
+StandaloneMod/*.obj
+
+# Runtime / logs
+mod_log.txt
+*.log
+
+# Generated / dumps (large or regeneratable)
+Generated/
+*.apmx64
+everything.xml
+
+# Large tooling / nested repos (track only mod source)
+Il2CppDumper-agmbk/
+Tools/
+
+# IDE / OS
+.vs/
+*.user
+.DS_Store
+Thumbs.db

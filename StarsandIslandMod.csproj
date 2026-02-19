@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Il2CppDumper-agmbk\**" />
+    <Compile Remove="Tools\**" />
+  </ItemGroup>
+  <PropertyGroup>
+    <AssemblyName>StarsandIslandMod</AssemblyName>
+    <Description>MelonLoader mod for Starsand Island</Description>
+    <Version>1.0.0</Version>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <OutputPath>..\Mods\StarsandIslandMod\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- MelonLoader - reference from game's MelonLoader folder; Private=false = don't copy to output -->
+    <Reference Include="MelonLoader">
+      <HintPath>..\Mods\~StarsandIslandMod\MelonLoader.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>..\Mods\~StarsandIslandMod\0Harmony.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <!-- Add UnityEngine.CoreModule from Generated/cpp2il_out after running GenerateDLLs.ps1 -Cpp2IL -->
+  </ItemGroup>
+
+  <Target Name="CopyMetadataHook" AfterTargets="Build">
+    <Copy SourceFiles="Tools\Il2CppMetadataExtractor\DllHook\dump-metadata-hook.dll" DestinationFolder="$(OutputPath)" SkipUnchangedFiles="true" Condition="Exists('Tools\Il2CppMetadataExtractor\DllHook\dump-metadata-hook.dll')" />
+    <Copy SourceFiles="Tools\Il2CppMetadataExtractor\DllHook\dump-metadata-hook.dll" DestinationFolder="..\Mods\~StarsandIslandMod" SkipUnchangedFiles="true" Condition="Exists('Tools\Il2CppMetadataExtractor\DllHook\dump-metadata-hook.dll')" />
+  </Target>
+
+</Project>
