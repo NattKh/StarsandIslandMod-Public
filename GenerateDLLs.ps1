@@ -1,7 +1,4 @@
 # Starsand Island - IL2CPP DLL Generation Script
-# Run this when MelonLoader's built-in generator fails. Generates DLLs for:
-# 1. Cpp2IL - Decompiled DLLs (for DnSpy browsing / mod reference)
-# 2. Il2CppDumper - Dummy DLLs + il2cpp.h (for Ghidra reverse engineering)
 
 param(
     [string]$GamePath = $PSScriptRoot + "\..",
@@ -71,8 +68,6 @@ function Run-Cpp2IL {
     $cpp2ilOut = Join-Path $OutputPath "cpp2il_out"
     New-Item -ItemType Directory -Force -Path $cpp2ilOut | Out-Null
     
-    # --just-give-me-dlls-asap-dammit = fastest, DummyDll output
-    # For newer Unity: try --force-unity-version 6000f1 or 2022f1 if auto-detect fails
     $args = @(
         "--game-path", $GamePath,
         "--output-path", $cpp2ilOut,
@@ -102,8 +97,6 @@ function Run-Il2CppDumper {
     $dumperOut = Join-Path $OutputPath "Il2CppDumper"
     New-Item -ItemType Directory -Force -Path $dumperOut | Out-Null
     
-    # Il2CppDumper: GameAssembly.dll or .exe, global-metadata.dat, output folder
-    # Use GameAssembly.dll for IL2CPP games
     $targetBinary = $GameAssembly
     if (-not (Test-Path $targetBinary)) {
         $targetBinary = $GameExe
