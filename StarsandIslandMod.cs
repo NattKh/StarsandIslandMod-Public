@@ -8,9 +8,6 @@ using MelonLoader;
 
 namespace StarsandIslandMod
 {
-    /// <summary>
-    /// Base mod for Starsand Island. Loads the metadata dump hook DLL via MelonLoader (no injection needed).
-    /// </summary>
     public class StarsandIslandMod : MelonMod
     {
         private static int _frameCount;
