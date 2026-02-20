@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  API Monitor Filter - Starsand Island IL2CPP metadata ONLY
-  Capture: NtReadFile, NtMapViewOfSection, CreateFileW (metadata flow)
-  Display: HIDE calls from NVIDIA, Steam, apphelp - keep GameAssembly/UnityPlayer
-  Load: Monitor -> Capture Filter -> Load Filter (island.xml)
-  Usage: Attach to StarsandIsland.exe, start capture, load a save.
-  Look for: NtReadFile Buffer=0x... or NtMapViewOfSection BaseAddress=0x...
 -->
 <ApiMonitor>
   <DisplayFilter>
